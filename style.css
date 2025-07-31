@@ -1,0 +1,109 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Orbitron', sans-serif;
+  }
+  
+  body {
+	overflow: hidden;
+	background-color: black;
+  }
+  
+  .background {
+	height: 100vh;
+	width: 100vw;
+	background: url('img/area_51.jpg') no-repeat center center fixed;
+	background-size: cover;
+	filter: brightness(0.9) contrast(1.2);
+  }
+  
+  .bird {
+	height: 80px;
+	width: 100px;
+	position: fixed;
+	top: 40vh;
+	left: 30vw;
+	z-index: 100;
+  }
+  
+  .pipe_sprite {
+	position: fixed;
+	width: 80px;
+	height: auto;
+	z-index: 50;
+	filter: drop-shadow(0 0 6px #00ffcc);
+	transition: transform 0.3s ease;
+  }
+  
+  .message {
+	position: absolute;
+	z-index: 10;
+	color: #00ffcc;
+	top: 30%;
+	left: 50%;
+	font-size: 3em;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	text-shadow: 0 0 8px #000;
+  }
+  
+  .messageStyle {
+	background: rgba(0, 0, 0, 0.7);
+	padding: 25px;
+	border-radius: 15px;
+	box-shadow: 0 0 15px #00ffcc;
+  }
+  
+  .score {
+	position: fixed;
+	z-index: 10;
+	height: 10vh;
+	font-size: 10vh;
+	font-weight: 600;
+	color: #00ffcc;
+	-webkit-text-stroke-width: 2px;
+	-webkit-text-stroke-color: black;
+	top: 0;
+	left: 0;
+	margin: 10px;
+  }
+  
+  .score_val {
+	color: gold;
+	font-weight: bold;
+  }
+  
+  .back-button {
+	position: fixed;
+	bottom: 20px;
+	left: 20px;
+	text-decoration: none;
+	font-size: 1.2em;
+	background: rgba(0, 255, 204, 0.2);
+	padding: 10px 20px;
+	border: 2px solid #00ffcc;
+	color: #00ffcc;
+	border-radius: 10px;
+	transition: 0.3s;
+	z-index: 20;
+  }
+  .back-button:hover {
+	background: #00ffcc;
+	color: #000;
+  }
+  
+  @media only screen and (max-width: 768px) {
+	.message {
+	  font-size: 2em;
+	  top: 50%;
+	}
+	.bird {
+	  width: 80px;
+	  height: 60px;
+	}
+	.pipe_sprite {
+	  width: 14vw;
+	}
+  }
+  
