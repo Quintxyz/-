@@ -1,4 +1,4 @@
-let move_speed = 3, grativy = 0.5;
+let move_speed = 2, grativy = 0.5; // ลดความเร็วของท่อลงให้ช้าลง
 let bird = document.querySelector('.bird');
 let img = document.getElementById('bird-1');
 let sound_point = new Audio('sounds effect/point.mp3');
@@ -14,8 +14,9 @@ let game_state = 'Start';
 img.style.display = 'none';
 message.classList.add('messageStyle');
 
-document.addEventListener('keydown', (e) => {
-    if (e.key == 'Enter' && game_state != 'Play') {
+// เปลี่ยนจากการกด Enter เป็นคลิกที่หน้าจอ
+document.addEventListener('click', () => {
+    if (game_state != 'Play') {
         document.querySelectorAll('.pipe_sprite').forEach((e) => e.remove());
         img.style.display = 'block';
         bird.style.top = '40vh';
@@ -47,7 +48,7 @@ function play() {
                     bird_props.top + bird_props.height > pipe_sprite_props.top
                 ) {
                     game_state = 'End';
-                    message.innerHTML = 'UFO Crashed!'.fontcolor('red') + '<br>Press Enter To Retry';
+                    message.innerHTML = 'UFO Crashed!'.fontcolor('red') + '<br>Click To Retry';
                     message.classList.add('messageStyle');
                     img.style.display = 'none';
                     sound_die.play();
@@ -74,17 +75,9 @@ function play() {
         if (game_state != 'Play') return;
         bird_dy += grativy;
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key == 'ArrowUp' || e.key == ' ') {
-                img.src = 'img/UFO.png';
-                bird_dy = -7.6;
-            }
-        });
-
-        document.addEventListener('keyup', (e) => {
-            if (e.key == 'ArrowUp' || e.key == ' ') {
-                img.src = 'img/UFO.png';
-            }
+        document.addEventListener('click', () => {
+            img.src = 'img/UFO.png';
+            bird_dy = -7.6; // เมื่อคลิกให้ UFO ขึ้นไป
         });
 
         if (bird_props.top <= 0 || bird_props.bottom >= background.bottom) {
@@ -100,7 +93,7 @@ function play() {
     requestAnimationFrame(apply_gravity);
 
     let pipe_seperation = 0;
-    let pipe_gap = 35;
+    let pipe_gap = 60;  // เพิ่มช่องว่างระหว่างท่อให้กว้างขึ้น
 
     function create_pipe() {
         if (game_state != 'Play') return;
@@ -109,22 +102,25 @@ function play() {
             pipe_seperation = 0;
             let pipe_posi = Math.floor(Math.random() * 43) + 8;
 
-            // ปืนบน
-            let pipe_sprite_inv = document.createElement('img');
-            pipe_sprite_inv.src = 'img/gun.png';
+            // ท่อบน (ใช้ div แทน img)
+            let pipe_sprite_inv = document.createElement('div');
             pipe_sprite_inv.className = 'pipe_sprite';
-            pipe_sprite_inv.style.top = (pipe_posi - 70) + 'vh';
-            pipe_sprite_inv.style.left = '100vw';
-            pipe_sprite_inv.style.transform = 'rotate(180deg)';
+            pipe_sprite_inv.style.height = (pipe_posi + 10) + 'vh';  // ทำให้ท่อบนสั้นลง
+            pipe_sprite_inv.style.top = (pipe_posi - 40) + 'vh'; // ตั้งตำแหน่งท่อ
+            pipe_sprite_inv.style.left = '100vw'; // ให้ท่อเริ่มที่ขอบขวา
+            pipe_sprite_inv.style.backgroundColor = '#00ffcc'; // สีท่อ (สามารถเปลี่ยนได้)
+            pipe_sprite_inv.style.width = '120px'; // ขนาดกว้างของท่อ
             document.body.appendChild(pipe_sprite_inv);
 
-            // ปืนล่าง
-            let pipe_sprite = document.createElement('img');
-            pipe_sprite.src = 'img/gun.png';
+            // ท่อล่าง (ใช้ div แทน img)
+            let pipe_sprite = document.createElement('div');
             pipe_sprite.className = 'pipe_sprite';
-            pipe_sprite.style.top = (pipe_posi + pipe_gap) + 'vh';
-            pipe_sprite.style.left = '100vw';
+            pipe_sprite.style.height = (100 - pipe_posi - pipe_gap) + 'vh';  // ทำให้ท่อใต้สั้นลง
+            pipe_sprite.style.top = (pipe_posi + pipe_gap) + 'vh'; // ตั้งตำแหน่งท่อ
+            pipe_sprite.style.left = '100vw'; // ให้ท่อเริ่มที่ขอบขวา
             pipe_sprite.increase_score = '1';
+            pipe_sprite.style.backgroundColor = '#00ffcc'; // สีท่อ (สามารถเปลี่ยนได้)
+            pipe_sprite.style.width = '120px'; // ขนาดกว้างของท่อ
             document.body.appendChild(pipe_sprite);
         }
 
