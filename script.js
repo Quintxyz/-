@@ -1,9 +1,8 @@
-let move_speed = 2, grativy = 0.5;
+let move_speed = 2, grativy = 0.5; // ความเร็วท่อและแรงโน้มถ่วง
 let bird = document.querySelector('.bird');
 let img = document.getElementById('bird-1');
 let sound_point = new Audio('sounds effect/point.mp3');
 let sound_die = new Audio('sounds effect/die.mp3');
-let sound_jump = new Audio('sounds effect/jump.mp3'); // เสียงกระโดด
 
 let bird_props = bird.getBoundingClientRect();
 let background = document.querySelector('.background').getBoundingClientRect();
@@ -18,7 +17,7 @@ message.classList.add('messageStyle');
 // เริ่มเกมเมื่อคลิก
 document.addEventListener('click', () => {
     if (game_state != 'Play') {
-        document.querySelectorAll('.pipe_sprite').forEach(e => e.remove());
+        document.querySelectorAll('.pipe_sprite').forEach((e) => e.remove());
         img.style.display = 'block';
         bird.style.top = '40vh';
         game_state = 'Play';
@@ -35,17 +34,19 @@ function play() {
         if (game_state != 'Play') return;
 
         let pipe_sprite = document.querySelectorAll('.pipe_sprite');
-        pipe_sprite.forEach(element => {
+        pipe_sprite.forEach((element) => {
             let pipe_sprite_props = element.getBoundingClientRect();
             bird_props = bird.getBoundingClientRect();
 
-            if (pipe_sprite_props.right <= 0) element.remove();
-            else {
-                if (bird_props.left < pipe_sprite_props.left + pipe_sprite_props.width &&
+            if (pipe_sprite_props.right <= 0) {
+                element.remove();
+            } else {
+                if (
+                    bird_props.left < pipe_sprite_props.left + pipe_sprite_props.width &&
                     bird_props.left + bird_props.width > pipe_sprite_props.left &&
                     bird_props.top < pipe_sprite_props.top + pipe_sprite_props.height &&
-                    bird_props.top + bird_props.height > pipe_sprite_props.top) {
-
+                    bird_props.top + bird_props.height > pipe_sprite_props.top
+                ) {
                     game_state = 'End';
                     message.innerHTML = 'UFO Crashed!'.fontcolor('red') + '<br>Click To Retry';
                     message.classList.add('messageStyle');
@@ -53,9 +54,11 @@ function play() {
                     sound_die.play();
                     return;
                 } else {
-                    if (pipe_sprite_props.right < bird_props.left &&
+                    if (
+                        pipe_sprite_props.right < bird_props.left &&
                         pipe_sprite_props.right + move_speed >= bird_props.left &&
-                        element.increase_score == '1') {
+                        element.increase_score == '1'
+                    ) {
                         score_val.innerHTML = +score_val.innerHTML + 1;
                         sound_point.play();
                     }
@@ -74,8 +77,7 @@ function play() {
 
         document.addEventListener('click', () => {
             img.src = 'img/UFO.png';
-            bird_dy = -6; // กระโดดต่ำลง
-            sound_jump.play(); // เล่นเสียงกระโดด
+            bird_dy = -7.6; // กระโดดพอดีเหมือนเดิม
         });
 
         if (bird_props.top <= 0 || bird_props.bottom >= background.bottom) {
@@ -84,6 +86,7 @@ function play() {
             message.classList.remove('messageStyle');
             return;
         }
+
         bird.style.top = bird_props.top + bird_dy + 'px';
         bird_props = bird.getBoundingClientRect();
         requestAnimationFrame(apply_gravity);
