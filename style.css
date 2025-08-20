@@ -3,40 +3,55 @@
 	padding: 0;
 	box-sizing: border-box;
 	font-family: 'Orbitron', sans-serif;
-  }
+}
   
-  body {
+body {
 	overflow: hidden;
 	background-color: black;
-  }
+}
   
-  .background {
+.background {
 	height: 100vh;
 	width: 100vw;
 	background: url('img/area_51.jpg') no-repeat center center fixed;
 	background-size: cover;
 	filter: brightness(0.9) contrast(1.2);
-  }
+}
   
-  .bird {
-	height: 150px;
-	width: 150px;
+.bird {
+	height: 100px;   /* ปรับเล็กลง */
+	width: 100px;
 	position: fixed;
-	top: 40vh;
+	top: 45vh;
 	left: 30vw;
 	z-index: 100;
-  }
+
+	/* เอฟเฟกต์เรืองแสง */
+	filter: drop-shadow(0 0 10px #00ffcc) drop-shadow(0 0 20px #00ffcc);
+
+	/* Animation ขยับลอย */
+	animation: ufoFloat 3s ease-in-out infinite;
+}
+
+@keyframes ufoFloat {
+	0%, 100% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-15px);
+	}
+}
   
-  .pipe_sprite {
+.pipe_sprite {
 	position: fixed;
 	width: 80px;
 	height: auto;
 	z-index: 50;
 	filter: drop-shadow(0 0 6px #00ffcc);
 	transition: transform 0.3s ease;
-  }
+}
   
-  .message {
+.message {
 	position: absolute;
 	z-index: 10;
 	color: #00ffcc;
@@ -46,16 +61,16 @@
 	transform: translate(-50%, -50%);
 	text-align: center;
 	text-shadow: 0 0 8px #000;
-  }
+}
   
-  .messageStyle {
+.messageStyle {
 	background: rgba(0, 0, 0, 0.7);
 	padding: 25px;
 	border-radius: 15px;
 	box-shadow: 0 0 15px #00ffcc;
-  }
+}
   
-  .score {
+.score {
 	position: fixed;
 	z-index: 10;
 	height: 10vh;
@@ -67,14 +82,14 @@
 	top: 0;
 	left: 0;
 	margin: 10px;
-  }
+}
   
-  .score_val {
+.score_val {
 	color: gold;
 	font-weight: bold;
-  }
+}
   
-  .back-button {
+.back-button {
 	position: fixed;
 	bottom: 20px;
 	left: 20px;
@@ -87,23 +102,67 @@
 	border-radius: 10px;
 	transition: 0.3s;
 	z-index: 20;
-  }
-  .back-button:hover {
+}
+.back-button:hover {
 	background: #00ffcc;
 	color: #000;
-  }
-  
-  @media only screen and (max-width: 768px) {
+}
+
+/* ปุ่มโซเชียล */
+.social-links {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	z-index: 20;
+}
+
+.social {
+	font-size: 0.85em;
+	text-decoration: none;
+	color: #ccc;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	transition: 0.3s;
+}
+
+.social i {
+	font-size: 1em;
+}
+
+.social:hover {
+	color: #fff;
+}
+
+.fb {
+	color: #1877f2;
+}
+
+.fb:hover {
+	color: #3b82f6;
+}
+
+.ig {
+	color: #e4405f;
+}
+
+.ig:hover {
+	color: #ff4d6d;
+}
+
+@media only screen and (max-width: 768px) {
 	.message {
 	  font-size: 2em;
 	  top: 50%;
 	}
 	.bird {
-	  width: 150px;
-	  height: 130px;
+	  width: 100px;
+	  height: 100px;
 	}
 	.pipe_sprite {
 	  width: 14vw;
 	}
-  }
-  
+}
