@@ -3,6 +3,7 @@ let bird = document.querySelector('.bird');
 let img = document.getElementById('bird-1');
 let sound_point = new Audio('sounds effect/point.mp3');
 let sound_die = new Audio('sounds effect/die.mp3');
+let sound_jump = new Audio('sounds effect/jump.mp3'); // 🔊 เพิ่มเสียงกระโดด
 
 let bird_props = bird.getBoundingClientRect();
 let background = document.querySelector('.background').getBoundingClientRect();
@@ -77,7 +78,8 @@ function play() {
 
         document.addEventListener('click', () => {
             img.src = 'img/UFO.png';
-            bird_dy = -7.6; // เมื่อคลิกให้ UFO ขึ้นไป
+            bird_dy = -6; // ปรับให้กระโดดต่ำลง
+            sound_jump.play(); // 🔊 เล่นเสียงกระโดด
         });
 
         if (bird_props.top <= 0 || bird_props.bottom >= background.bottom) {
@@ -105,22 +107,22 @@ function play() {
             // ท่อบน (ใช้ div แทน img)
             let pipe_sprite_inv = document.createElement('div');
             pipe_sprite_inv.className = 'pipe_sprite';
-            pipe_sprite_inv.style.height = (pipe_posi + 10) + 'vh';  // ทำให้ท่อบนสั้นลง
-            pipe_sprite_inv.style.top = (pipe_posi - 40) + 'vh'; // ตั้งตำแหน่งท่อ
-            pipe_sprite_inv.style.left = '100vw'; // ให้ท่อเริ่มที่ขอบขวา
-            pipe_sprite_inv.style.backgroundColor = '#00ffcc'; // สีท่อ (สามารถเปลี่ยนได้)
-            pipe_sprite_inv.style.width = '120px'; // ขนาดกว้างของท่อ
+            pipe_sprite_inv.style.height = (pipe_posi + 10) + 'vh';
+            pipe_sprite_inv.style.top = (pipe_posi - 40) + 'vh';
+            pipe_sprite_inv.style.left = '100vw';
+            pipe_sprite_inv.style.backgroundColor = '#00ffcc';
+            pipe_sprite_inv.style.width = '120px';
             document.body.appendChild(pipe_sprite_inv);
 
             // ท่อล่าง (ใช้ div แทน img)
             let pipe_sprite = document.createElement('div');
             pipe_sprite.className = 'pipe_sprite';
-            pipe_sprite.style.height = (100 - pipe_posi - pipe_gap) + 'vh';  // ทำให้ท่อใต้สั้นลง
-            pipe_sprite.style.top = (pipe_posi + pipe_gap) + 'vh'; // ตั้งตำแหน่งท่อ
-            pipe_sprite.style.left = '100vw'; // ให้ท่อเริ่มที่ขอบขวา
+            pipe_sprite.style.height = (100 - pipe_posi - pipe_gap) + 'vh';
+            pipe_sprite.style.top = (pipe_posi + pipe_gap) + 'vh';
+            pipe_sprite.style.left = '100vw';
             pipe_sprite.increase_score = '1';
-            pipe_sprite.style.backgroundColor = '#00ffcc'; // สีท่อ (สามารถเปลี่ยนได้)
-            pipe_sprite.style.width = '120px'; // ขนาดกว้างของท่อ
+            pipe_sprite.style.backgroundColor = '#00ffcc';
+            pipe_sprite.style.width = '120px';
             document.body.appendChild(pipe_sprite);
         }
 
