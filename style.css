@@ -19,23 +19,12 @@ body {
 }
   
 .bird {
-	height: 100px;   /* กลับไปเหมือนเดิม */
-	width: 100px;
+	height: 150px;
+	width: 150px;
 	position: fixed;
-	top: 45vh;
+	top: 40vh;
 	left: 30vw;
 	z-index: 100;
-
-	/* เอฟเฟกต์เรืองแสง */
-	filter: drop-shadow(0 0 10px #00ffcc) drop-shadow(0 0 20px #00ffcc);
-
-	/* Animation ขยับลอย */
-	animation: ufoFloat 3s ease-in-out infinite;
-}
-
-@keyframes ufoFloat {
-	0%, 100% { transform: translateY(0px); }
-	50% { transform: translateY(-15px); }
 }
   
 .pipe_sprite {
@@ -80,7 +69,10 @@ body {
 	margin: 10px;
 }
   
-.score_val { color: gold; font-weight: bold; }
+.score_val {
+	color: gold;
+	font-weight: bold;
+}
   
 .back-button {
 	position: fixed;
@@ -96,7 +88,10 @@ body {
 	transition: 0.3s;
 	z-index: 20;
 }
-.back-button:hover { background: #00ffcc; color: #000; }
+.back-button:hover {
+	background: #00ffcc;
+	color: #000;
+}
 
 /* ปุ่มโซเชียล */
 .social-links {
@@ -105,30 +100,47 @@ body {
 	right: 20px;
 	display: flex;
 	flex-direction: column;
-	gap: 6px;
+	gap: 5px;
 	z-index: 20;
 }
 
 .social {
-	font-size: 0.85em;
+	font-size: 0.8em;
 	text-decoration: none;
 	color: #ccc;
-	display: flex;
-	align-items: center;
-	gap: 6px;
 	transition: 0.3s;
 }
 
-.social:hover { color: #fff; }
+.social:hover {
+	color: #fff;
+}
 
-.fb { color: #1877f2; }
-.fb:hover { color: #3b82f6; }
+.fb {
+	color: #1877f2;
+}
 
-.ig { color: #e4405f; }
-.ig:hover { color: #ff4d6d; }
+.fb:hover {
+	color: #3b82f6;
+}
+
+.ig {
+	color: #e4405f;
+}
+
+.ig:hover {
+	color: #ff4d6d;
+}
 
 @media only screen and (max-width: 768px) {
-	.message { font-size: 2em; top: 50%; }
-	.bird { width: 100px; height: 100px; }
-	.pipe_sprite { width: 14vw; }
+	.message {
+	  font-size: 2em;
+	  top: 50%;
+	}
+	.bird {
+	  width: 150px;
+	  height: 130px;
+	}
+	.pipe_sprite {
+	  width: 14vw;
+	}
 }
