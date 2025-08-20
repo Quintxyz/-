@@ -1,9 +1,9 @@
-let move_speed = 2, grativy = 0.5; // ลดความเร็วของท่อลงให้ช้าลง
+let move_speed = 2, grativy = 0.5;
 let bird = document.querySelector('.bird');
 let img = document.getElementById('bird-1');
 let sound_point = new Audio('sounds effect/point.mp3');
 let sound_die = new Audio('sounds effect/die.mp3');
-let sound_jump = new Audio('sounds effect/jump.mp3'); // 🔊 เพิ่มเสียงกระโดด
+let sound_jump = new Audio('sounds effect/jump.mp3'); // เสียงกระโดด
 
 let bird_props = bird.getBoundingClientRect();
 let background = document.querySelector('.background').getBoundingClientRect();
@@ -15,10 +15,10 @@ let game_state = 'Start';
 img.style.display = 'none';
 message.classList.add('messageStyle');
 
-// เปลี่ยนจากการกด Enter เป็นคลิกที่หน้าจอ
+// เริ่มเกมเมื่อคลิก
 document.addEventListener('click', () => {
     if (game_state != 'Play') {
-        document.querySelectorAll('.pipe_sprite').forEach((e) => e.remove());
+        document.querySelectorAll('.pipe_sprite').forEach(e => e.remove());
         img.style.display = 'block';
         bird.style.top = '40vh';
         game_state = 'Play';
@@ -35,19 +35,17 @@ function play() {
         if (game_state != 'Play') return;
 
         let pipe_sprite = document.querySelectorAll('.pipe_sprite');
-        pipe_sprite.forEach((element) => {
+        pipe_sprite.forEach(element => {
             let pipe_sprite_props = element.getBoundingClientRect();
             bird_props = bird.getBoundingClientRect();
 
-            if (pipe_sprite_props.right <= 0) {
-                element.remove();
-            } else {
-                if (
-                    bird_props.left < pipe_sprite_props.left + pipe_sprite_props.width &&
+            if (pipe_sprite_props.right <= 0) element.remove();
+            else {
+                if (bird_props.left < pipe_sprite_props.left + pipe_sprite_props.width &&
                     bird_props.left + bird_props.width > pipe_sprite_props.left &&
                     bird_props.top < pipe_sprite_props.top + pipe_sprite_props.height &&
-                    bird_props.top + bird_props.height > pipe_sprite_props.top
-                ) {
+                    bird_props.top + bird_props.height > pipe_sprite_props.top) {
+
                     game_state = 'End';
                     message.innerHTML = 'UFO Crashed!'.fontcolor('red') + '<br>Click To Retry';
                     message.classList.add('messageStyle');
@@ -55,11 +53,9 @@ function play() {
                     sound_die.play();
                     return;
                 } else {
-                    if (
-                        pipe_sprite_props.right < bird_props.left &&
+                    if (pipe_sprite_props.right < bird_props.left &&
                         pipe_sprite_props.right + move_speed >= bird_props.left &&
-                        element.increase_score == '1'
-                    ) {
+                        element.increase_score == '1') {
                         score_val.innerHTML = +score_val.innerHTML + 1;
                         sound_point.play();
                     }
@@ -78,8 +74,8 @@ function play() {
 
         document.addEventListener('click', () => {
             img.src = 'img/UFO.png';
-            bird_dy = -6; // ปรับให้กระโดดต่ำลง
-            sound_jump.play(); // 🔊 เล่นเสียงกระโดด
+            bird_dy = -6; // กระโดดต่ำลง
+            sound_jump.play(); // เล่นเสียงกระโดด
         });
 
         if (bird_props.top <= 0 || bird_props.bottom >= background.bottom) {
@@ -95,7 +91,7 @@ function play() {
     requestAnimationFrame(apply_gravity);
 
     let pipe_seperation = 0;
-    let pipe_gap = 60;  // เพิ่มช่องว่างระหว่างท่อให้กว้างขึ้น
+    let pipe_gap = 60;
 
     function create_pipe() {
         if (game_state != 'Play') return;
@@ -104,7 +100,7 @@ function play() {
             pipe_seperation = 0;
             let pipe_posi = Math.floor(Math.random() * 43) + 8;
 
-            // ท่อบน (ใช้ div แทน img)
+            // ท่อบน
             let pipe_sprite_inv = document.createElement('div');
             pipe_sprite_inv.className = 'pipe_sprite';
             pipe_sprite_inv.style.height = (pipe_posi + 10) + 'vh';
@@ -114,7 +110,7 @@ function play() {
             pipe_sprite_inv.style.width = '120px';
             document.body.appendChild(pipe_sprite_inv);
 
-            // ท่อล่าง (ใช้ div แทน img)
+            // ท่อล่าง
             let pipe_sprite = document.createElement('div');
             pipe_sprite.className = 'pipe_sprite';
             pipe_sprite.style.height = (100 - pipe_posi - pipe_gap) + 'vh';
