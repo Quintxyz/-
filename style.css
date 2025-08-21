@@ -4,12 +4,12 @@
 	box-sizing: border-box;
 	font-family: 'Orbitron', sans-serif;
 }
-  
+  
 body {
 	overflow: hidden;
 	background-color: black;
 }
-  
+  
 .background {
 	height: 100vh;
 	width: 100vw;
@@ -17,7 +17,7 @@ body {
 	background-size: cover;
 	filter: brightness(0.9) contrast(1.2);
 }
-  
+  
 .bird {
 	height: 150px;
 	width: 150px;
@@ -26,7 +26,7 @@ body {
 	left: 30vw;
 	z-index: 100;
 }
-  
+  
 .pipe_sprite {
 	position: fixed;
 	width: 80px;
@@ -35,7 +35,7 @@ body {
 	filter: drop-shadow(0 0 6px #00ffcc);
 	transition: transform 0.3s ease;
 }
-  
+  
 .message {
 	position: absolute;
 	z-index: 10;
@@ -47,14 +47,14 @@ body {
 	text-align: center;
 	text-shadow: 0 0 8px #000;
 }
-  
+  
 .messageStyle {
 	background: rgba(0, 0, 0, 0.7);
 	padding: 25px;
 	border-radius: 15px;
 	box-shadow: 0 0 15px #00ffcc;
 }
-  
+  
 .score {
 	position: fixed;
 	z-index: 10;
@@ -68,12 +68,12 @@ body {
 	left: 0;
 	margin: 10px;
 }
-  
+  
 .score_val {
 	color: gold;
 	font-weight: bold;
 }
-  
+  
 .back-button {
 	position: fixed;
 	bottom: 20px;
@@ -133,14 +133,14 @@ body {
 
 @media only screen and (max-width: 768px) {
 	.message {
-	  font-size: 2em;
-	  top: 50%;
+	  font-size: 2em;
+	  top: 50%;
 	}
 	.bird {
-	  width: 150px;
-	  height: 130px;
+	  width: 150px;
+	  height: 130px;
 	}
 	.pipe_sprite {
-	  width: 14vw;
+	  width: 14vw;
 	}
 }
