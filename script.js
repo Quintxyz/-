@@ -1,9 +1,6 @@
 let move_speed = 2, grativy = 0.5;
 let bird = document.querySelector('.bird');
 let img = document.getElementById('bird-1');
-// ลบตัวแปรเสียง
-// let sound_point = new Audio('sounds effect/point.mp3');
-// let sound_die = new Audio('sounds effect/die.mp3');
 
 let bird_props = bird.getBoundingClientRect();
 let background = document.querySelector('.background').getBoundingClientRect();
@@ -15,35 +12,21 @@ let game_state = 'Start';
 img.style.display = 'none';
 message.classList.add('messageStyle');
 
-// เพิ่มการแจ้งเตือนก่อนเริ่มเกม
-showPreGameAlert();
+// แก้ไขการแสดงข้อความให้แสดงผลตั้งแต่แรก
+message.innerHTML = 'ทำคะแนนให้ได้ 10 คะแนนเพื่อรับของรางวัล!<br><br>คลิกที่หน้าจอเพื่อเริ่มเล่น';
+message.style.display = 'block';
 
-function showPreGameAlert() {
-    const alertBox = document.createElement('div');
-    alertBox.classList.add('message', 'messageStyle');
-    alertBox.innerHTML = 'ทำคะแนนให้ได้ 10 คะแนนเพื่อรับของรางวัล!<br><br>คลิกที่หน้าจอเพื่อเริ่มเล่น';
-    document.body.appendChild(alertBox);
-    message.style.display = 'none'; // ซ่อนข้อความเดิม
-}
-
-// เปลี่ยนจากการกด Enter เป็นคลิกที่หน้าจอ
+// เมื่อคลิกที่หน้าจอเพื่อเริ่มเกม
 document.addEventListener('click', () => {
     if (game_state !== 'Play') {
-        // ลบ alert box ก่อนเริ่มเกม
-        const alertBox = document.querySelector('.message.messageStyle');
-        if (alertBox) {
-            alertBox.remove();
-        }
-        
         document.querySelectorAll('.pipe_sprite').forEach((e) => e.remove());
         img.style.display = 'block';
         bird.style.top = '40vh';
         game_state = 'Play';
         message.innerHTML = '';
+        message.style.display = 'none'; // ซ่อนข้อความเมื่อเกมเริ่ม
         score_title.innerHTML = 'Score : ';
         score_val.innerHTML = '0';
-        message.classList.remove('messageStyle');
-        message.style.display = 'block'; // แสดงข้อความอีกครั้ง
         play();
     }
 });
@@ -69,9 +52,8 @@ function play() {
                     game_state = 'End';
                     message.innerHTML = 'UFO Crashed! <br>คลิกที่หน้าจอเพื่อเล่นอีกครั้ง';
                     message.classList.add('messageStyle');
+                    message.style.display = 'block'; // แสดงข้อความเมื่อเกมจบ
                     img.style.display = 'none';
-                    // ลบเสียง
-                    // sound_die.play();
                     return;
                 } else {
                     if (
@@ -80,8 +62,6 @@ function play() {
                         element.increase_score === '1'
                     ) {
                         score_val.innerHTML = +score_val.innerHTML + 1;
-                        // ลบเสียง
-                        // sound_point.play();
                     }
                     element.style.left = pipe_sprite_props.left - move_speed + 'px';
                 }
@@ -96,18 +76,18 @@ function play() {
         if (game_state !== 'Play') return;
         bird_dy += grativy;
 
+        // เมื่อคลิกที่หน้าจอ
         document.addEventListener('click', () => {
             img.src = 'img/UFO.png';
-            bird_dy = -7.6; // เมื่อคลิกให้ UFO ขึ้นไป
+            bird_dy = -7.6;
         });
 
         if (bird_props.top <= 0 || bird_props.bottom >= background.bottom) {
             game_state = 'End';
             message.innerHTML = 'UFO Crashed! <br>คลิกที่หน้าจอเพื่อเล่นอีกครั้ง';
             message.classList.add('messageStyle');
+            message.style.display = 'block';
             img.style.display = 'none';
-            // ลบเสียง
-            // sound_die.play();
             return;
         }
         bird.style.top = bird_props.top + bird_dy + 'px';
@@ -129,7 +109,7 @@ function play() {
             let pipe_sprite_inv = document.createElement('div');
             pipe_sprite_inv.className = 'pipe_sprite';
             pipe_sprite_inv.style.height = (pipe_posi + 10) + 'vh';
-            pipe_sprite_inv.style.top = (pipe_posi - 40) + 'vh';
+            pipe_sprite_inv.style.top = '0'; // ปรับให้ท่อบนเริ่มจากด้านบนสุด
             pipe_sprite_inv.style.left = '100vw';
             pipe_sprite_inv.style.backgroundColor = '#00ffcc';
             pipe_sprite_inv.style.width = '120px';
@@ -138,7 +118,7 @@ function play() {
             let pipe_sprite = document.createElement('div');
             pipe_sprite.className = 'pipe_sprite';
             pipe_sprite.style.height = (100 - pipe_posi - pipe_gap) + 'vh';
-            pipe_sprite.style.top = (pipe_posi + pipe_gap) + 'vh';
+            pipe_sprite.style.bottom = '0'; // ปรับให้ท่อล่างเริ่มจากด้านล่างสุด
             pipe_sprite.style.left = '100vw';
             pipe_sprite.increase_score = '1';
             pipe_sprite.style.backgroundColor = '#00ffcc';
